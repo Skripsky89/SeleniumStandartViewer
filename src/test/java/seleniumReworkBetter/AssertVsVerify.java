@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver.Timeouts;
+import org.openqa.selenium.WebElement;
+import java.util.List;
 
 import static org.junit.Assert.fail;
 
@@ -27,30 +29,30 @@ public class AssertVsVerify {
 
     }
     @Test
-    public void test (){
+    public void test () {
 
-        driver.get(BASE_URL+"tabulka.php");
-        Assert.assertEquals("1",driver.findElement(By.cssSelector("td")).getText());
+        driver.get(BASE_URL + "tabulka.php");
+        Assert.assertEquals("1", driver.findElement(By.cssSelector("td")).getText());
+        List<WebElement> rows = driver.findElements(By.xpath("//table//tbody/tr"));
+        for (int i = 1; i < rows.size() + 1; i++) {
+            try {
+                Assert.assertEquals(String.valueOf(i), driver.findElement(By.xpath("//tr["+i+"]/td")).getText());
 
+            } catch (Error e) {
+                verificationErrors.append(e.toString());
+            }
 
-        try{
-            Assert.assertEquals("2",driver.findElement(By.xpath("//tr[2]/td")).getText());
-
-        }
-        catch(Error e){
-            verificationErrors.append(e.toString());
         }
         System.out.println("Jde to dobře:");
-    }
 
+    }
     @After
     public void tearDone (){
         String verificationErrorsString = verificationErrors.toString();
-        driver.quit();
         if (!"".equals(verificationErrorsString)){
             fail(verificationErrorsString);
         }
-
+        driver.quit();
     }
 
 }
