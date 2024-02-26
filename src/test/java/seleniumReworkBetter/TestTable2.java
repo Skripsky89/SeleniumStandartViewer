@@ -25,7 +25,7 @@ public class TestTable2 {
     @Test
     public void test() {
         driver.get(BASE_URL);
-        java.util.List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+        java.util.List<WebElement> rows = driver.findElements(By.xpath("//input[@value='Eva Mazikova']"));
         //System.out.println(rows);
         for (WebElement row : rows) {
             System.out.println(row.getText());
@@ -36,6 +36,6 @@ public class TestTable2 {
 
     @After
     public void tearDone() {
-    //driver.quit();
+    driver.quit();
     }
 }

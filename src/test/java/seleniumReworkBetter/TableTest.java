@@ -44,7 +44,7 @@ public class TableTest {
 
     @After
     public void tearDone() {
-        //driver.quit();
+        driver.quit();
 
     }
 }
