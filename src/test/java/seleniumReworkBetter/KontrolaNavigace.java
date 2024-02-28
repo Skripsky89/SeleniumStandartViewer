@@ -12,10 +12,13 @@ import java.lang.Thread;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.List;
+import java.util.ArrayList;
+
 public class KontrolaNavigace {
 
     private WebDriver driver;
-    private final String BASE_URL ="http://localhost/vybersi.php";
+    private final String BASE_URL ="http://localhost/";
 
     @Before
     public void setUp (){
@@ -24,9 +27,21 @@ public class KontrolaNavigace {
     }
     @Test
     public void test(){
-        driver.get(BASE_URL);
-        System.out.println(driver.findElement(By.xpath("//li[a/@href='vybersi.php']")).getAttribute("class"));
-        Assert.assertTrue(driver.findElement(By.xpath("//li[a/@href='vybersi.php']")).getAttribute("class").contains("activ"));
+
+        String expectedClass = "activ";
+
+        List<String> pages = new ArrayList<>();
+        pages.add("vybersi");
+        pages.add("tabulka");
+        pages.add("zjavenie");
+
+        for (String page :pages){
+            driver.get(BASE_URL + "/" + page +".php");
+            Assert.assertTrue(driver.findElement(By.xpath("//li[a/@href='" + page + ".php']"))
+                    .getAttribute("class").contains("activ"));
+        }
+
+
     }
 
 
