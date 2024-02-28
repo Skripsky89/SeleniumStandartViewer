@@ -1,32 +1,25 @@
 package seleniumReworkBetter;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import java.lang.Thread;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.util.List;
-import org.openqa.selenium.WebElement;
-import java.util.ArrayList;
+
+
 
 public class TitleTest {
 
     private WebDriver driver;
     private final String BASE_URL = "http://localhost";
 
-    @After
-    public void tearDone (){
 
-        driver.quit();
 
-    }
     @Before
     public void setUp (){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michal\\Desktop\\JAVA\\chromedriver-win64\\chromedriver.exe");
@@ -54,6 +47,13 @@ public class TitleTest {
         }
 
     }
+    @After
+    public void tearDone ()throws IOException {
+        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        org.apache.commons.io.FileUtils.copyFile(screenshot,new File("C://tmp//screeshots.pgn"));
+        System.out.println(driver.getPageSource());
+        driver.quit();
 
+    }
 
 }
