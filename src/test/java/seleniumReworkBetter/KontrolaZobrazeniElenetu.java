@@ -12,6 +12,7 @@ import java.lang.Thread;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 public class KontrolaZobrazeniElenetu {
 
     private WebDriver driver;
