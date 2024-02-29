@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import java.util.List;
 
 public class TestTable2 {
 
@@ -25,8 +26,8 @@ public class TestTable2 {
     @Test
     public void test() {
         driver.get(BASE_URL);
-        java.util.List<WebElement> rows = driver.findElements(By.xpath("//input[@value='Eva Mazikova']"));
-        //System.out.println(rows);
+        List<WebElement> rows = driver.findElements(By.xpath("//input[@value='Eva Mazikova']"));
+        System.out.println(rows);
         for (WebElement row : rows) {
             System.out.println(row.getText());
 
