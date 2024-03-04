@@ -2,17 +2,15 @@ package seleniumReworkBetter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.TakesScreenshot;
+import java.text.SimpleDateFormat;
 
 public class Formular {
 
@@ -23,7 +21,11 @@ public class Formular {
     private final String Prijmeni = "Karel";
     private final String Heslo = "fafawrf2378fd";
     private final String Reheslo = "fafawrf2378fd";
-    public int k=1;
+    private String mojeSlozka ="C:\\Users\\Michal\\";
+    Date datum = new Date();
+    SimpleDateFormat formatdatum = new SimpleDateFormat("yyyy_MMMM_dd_HH_mm_ss");
+    String currentDateTime = formatdatum.format(datum);
+
     @Before
     public void setUp (){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michal\\Desktop\\JAVA\\chromedriver-win64\\chromedriver.exe");
@@ -36,6 +38,9 @@ public class Formular {
     @Test
     public void testCheckbox() throws IOException {
 
+        //System.out.println(datum);
+        //System.out.println(formatdatum);
+        //System.out.println(formatdatum.format(datum));
 
         seleniumReworkBetter.Formular.Result result = getResult();
         result.SomRobot.click();
@@ -44,8 +49,10 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-        extracted();
-        k=1;
+        extracted(mojeSlozka+"KontrolatestCheckbox"+currentDateTime+".png");
+
+
+
 
     }
     @Test
@@ -60,8 +67,8 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-        extracted();
-        k=2;
+        extracted(mojeSlozka+"KontrolaTestName"+currentDateTime+".png");
+
 
     }
     @Test
@@ -75,8 +82,8 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-        extracted();
-        k=3;
+        extracted(mojeSlozka+"KontrolaTestEmail"+currentDateTime+".png");
+
 
     }
     @Test
@@ -90,8 +97,8 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-        extracted();
-        k=4;
+        extracted(mojeSlozka+"KontrolaTestPrijmeni"+currentDateTime+".png");
+
 
     }
     @Test
@@ -109,8 +116,8 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-        extracted();
-        k=5;
+        extracted(mojeSlozka+"KontrolaTestEmailVelkaPismena"+currentDateTime+".png");
+
 
     }
     @Test
@@ -126,8 +133,8 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-        extracted();
-        k=6;
+        extracted(mojeSlozka+"KontrolaTestRuznaHesla"+currentDateTime+".png");
+
 
     } @Test
     public void testHappy ()throws IOException{
@@ -144,8 +151,8 @@ public class Formular {
 
         String TextVysledku = Vysledek.getText();
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-        extracted();
-        k=7;
+        extracted(mojeSlozka+"KontrolaTestHappy"+currentDateTime+"png");
+
 
     }
      @Test
@@ -163,16 +170,16 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-        extracted();
-         k=8;
+        extracted(mojeSlozka+"KontrolaTestSpatnyEmailBezPripony"+currentDateTime+".png");
+
 
 
      }
 
-    private void extracted() throws IOException {
+    private void extracted(String VarPath) throws IOException {
 
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File("C:\\Users\\Michal\\screenshot"+k+".png"));
+            FileUtils.copyFile(scrFile, new File(VarPath));
 
     }
 
@@ -194,7 +201,7 @@ public class Formular {
 
     @After
     public void tearDone () throws IOException {
-        extracted();
+
         driver.close();
         driver.quit();
 
