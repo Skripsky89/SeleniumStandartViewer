@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class RegistracniFormular {
@@ -157,13 +158,13 @@ public class RegistracniFormular {
     }
 
     private seleniumReworkBetter.RegistracniFormular.Result getResult() {
-        org.openqa.selenium.WebElement Pemail = driver.findElement(org.openqa.selenium.By.xpath("//input[@name='email']"));
-        org.openqa.selenium.WebElement Pjmeno = driver.findElement(org.openqa.selenium.By.xpath("//input[@name='name']"));
-        org.openqa.selenium.WebElement Pprimeni = driver.findElement(org.openqa.selenium.By.xpath("//input[@name='surname']"));
-        org.openqa.selenium.WebElement Pheslo = driver.findElement(org.openqa.selenium.By.xpath("//input[@name='password']"));
-        org.openqa.selenium.WebElement Preheslo = driver.findElement(org.openqa.selenium.By.xpath("//input[@name='password-repeat']"));
-        org.openqa.selenium.WebElement SomRobot = driver.findElement(org.openqa.selenium.By.id("checkbox"));
-        org.openqa.selenium.WebElement Pregistrace = driver.findElement(org.openqa.selenium.By.xpath("//button[@class='btn btn-success btn-lg btn-block']"));
+        WebElement Pemail = driver.findElement(By.xpath("//input[@name='email']"));
+        WebElement Pjmeno = driver.findElement(By.xpath("//input[@name='name']"));
+        WebElement Pprimeni = driver.findElement(By.xpath("//input[@name='surname']"));
+        WebElement Pheslo = driver.findElement(By.xpath("//input[@name='password']"));
+        WebElement Preheslo = driver.findElement(By.xpath("//input[@name='password-repeat']"));
+        WebElement SomRobot = driver.findElement(By.id("checkbox"));
+        WebElement Pregistrace = driver.findElement(By.xpath("//button[@class='btn btn-success btn-lg btn-block']"));
         seleniumReworkBetter.RegistracniFormular.Result sklad = new seleniumReworkBetter.RegistracniFormular.Result(Pemail, Pjmeno, Pprimeni, Pheslo, Preheslo, SomRobot, Pregistrace);
         return sklad;
     }
