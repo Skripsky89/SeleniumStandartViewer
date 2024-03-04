@@ -23,36 +23,36 @@ public class Formular {
     private final String Prijmeni = "Karel";
     private final String Heslo = "fafawrf2378fd";
     private final String Reheslo = "fafawrf2378fd";
-
+    public int k=1;
     @Before
     public void setUp (){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michal\\Desktop\\JAVA\\chromedriver-win64\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(BASE_URL);
 
+
+
     }
     @Test
-    public void testCheckbox() throws  IOException  {
+    public void testCheckbox() throws IOException {
 
 
         seleniumReworkBetter.Formular.Result result = getResult();
         result.SomRobot.click();
         result.Pregistrace.click();
-
         WebElement Vysledek = driver.findElement(By.xpath("//div[contains(@class, 'alert-danger')]"));
-
         String TextVysledku = Vysledek.getText();
-        Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
+        Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
         extracted();
+        k=1;
 
     }
     @Test
-    public void testName  ()throws  IOException {
+    public void testName  ()throws IOException{
 
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
         result.Pjmeno.sendKeys(Jmeno);
         result.SomRobot.click();
         result.Pregistrace.click();
@@ -60,15 +60,14 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-
         extracted();
+        k=2;
 
     }
     @Test
-    public void testEmail ()throws  IOException {
+    public void testEmail ()throws IOException{
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
         result.Pemail.sendKeys(Email);
         result.SomRobot.click();
         result.Pregistrace.click();
@@ -76,15 +75,14 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-
         extracted();
+        k=3;
 
     }
     @Test
-    public void testPrijmeni ()throws  IOException {
+    public void testPrijmeni ()throws IOException{
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
         result.Pprimeni.sendKeys(Prijmeni);
         result.SomRobot.click();
         result.Pregistrace.click();
@@ -92,15 +90,14 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-
         extracted();
+        k=4;
 
     }
     @Test
-    public void testEmailVelkaPismo ()throws IOException {
+    public void testEmailVelkaPismo ()throws IOException{
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
         result.Pjmeno.sendKeys(Jmeno);
         result.Pprimeni.sendKeys(Prijmeni);
         result.Pemail.sendKeys("NOVA@gmail.com");
@@ -112,16 +109,15 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-
         extracted();
+        k=5;
 
     }
     @Test
-    public void testRuzneHela ()throws IOException {
+    public void testRuzneHela ()throws IOException{
 
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
         result.Pheslo.sendKeys(Heslo);
         result.Preheslo.sendKeys("fjaio");
         result.SomRobot.click();
@@ -130,11 +126,11 @@ public class Formular {
         String TextVysledku = Vysledek.getText();
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
-
         extracted();
+        k=6;
 
     } @Test
-    public void testHappy ()throws IOException {
+    public void testHappy ()throws IOException{
 
         seleniumReworkBetter.Formular.Result result = getResult();
         result.Pjmeno().sendKeys(Jmeno);
@@ -148,36 +144,36 @@ public class Formular {
 
         String TextVysledku = Vysledek.getText();
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-
         extracted();
+        k=7;
 
     }
      @Test
-    public void testSpatnyEmailBezPripony() throws IOException {
-
+    public void testSpatnyEmailBezPripony()throws IOException{
 
         seleniumReworkBetter.Formular.Result result = getResult();
-
-         result.Pjmeno().sendKeys(Jmeno);
-         result.Pprimeni().sendKeys(Prijmeni);
-         result.Pemail().sendKeys("NOVA@gmail");
-         result.Pheslo().sendKeys(Heslo);
-         result.Preheslo().sendKeys(Reheslo);
-         result.SomRobot().click();
-         result.Pregistrace().click();
-
+        result.Pjmeno().sendKeys(Jmeno);
+        result.Pprimeni().sendKeys(Prijmeni);
+        result.Pemail().sendKeys("NOVA@gmail");
+        result.Pheslo().sendKeys(Heslo);
+        result.Preheslo().sendKeys(Reheslo);
+        result.SomRobot().click();
+        result.Pregistrace().click();
         WebElement Vysledek = driver.findElement(By.xpath("//div[contains(@class, 'alert-success')]"));
-
         String TextVysledku = Vysledek.getText();
-        Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
 
+        Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
         extracted();
+         k=8;
+
 
      }
 
     private void extracted() throws IOException {
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File("C:\\Users\\Michal\\AppData\\Local\\Temp\\screenshot.png"));
+
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File("C:\\Users\\Michal\\screenshot"+k+".png"));
+
     }
 
     private seleniumReworkBetter.Formular.Result getResult() {
@@ -190,14 +186,15 @@ public class Formular {
         WebElement Pregistrace = driver.findElement(By.xpath("//button[@class='btn btn-success btn-lg btn-block']"));
         seleniumReworkBetter.Formular.Result sklad = new seleniumReworkBetter.Formular.Result(Pemail, Pjmeno, Pprimeni, Pheslo, Preheslo, SomRobot, Pregistrace);
         return sklad;
+
     }
 
     private record Result(WebElement Pemail,WebElement Pjmeno,WebElement Pprimeni, WebElement Pheslo, WebElement Preheslo, WebElement SomRobot,WebElement Pregistrace) {
     }
 
     @After
-    public void tearDone (){
-
+    public void tearDone () throws IOException {
+        extracted();
         driver.close();
         driver.quit();
 
