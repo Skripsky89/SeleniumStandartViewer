@@ -7,12 +7,14 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.TakesScreenshot;
 
-
-public class RegistracniFormular {
+public class Formular {
 
     private WebDriver driver;
     private final String BASE_URL = "http://localhost/registracia.php";
@@ -30,10 +32,10 @@ public class RegistracniFormular {
 
     }
     @Test
-    public void testCheckbox()  {
+    public void testCheckbox() throws  IOException  {
 
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
         result.SomRobot.click();
         result.Pregistrace.click();
 
@@ -42,12 +44,14 @@ public class RegistracniFormular {
         String TextVysledku = Vysledek.getText();
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
+        extracted();
+
     }
     @Test
-    public void testName (){
+    public void testName  ()throws  IOException {
 
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
         result.Pjmeno.sendKeys(Jmeno);
         result.SomRobot.click();
@@ -57,11 +61,13 @@ public class RegistracniFormular {
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
+        extracted();
+
     }
     @Test
-    public void testEmail (){
+    public void testEmail ()throws  IOException {
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
         result.Pemail.sendKeys(Email);
         result.SomRobot.click();
@@ -71,11 +77,13 @@ public class RegistracniFormular {
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
+        extracted();
+
     }
     @Test
-    public void testPrijmeni (){
+    public void testPrijmeni ()throws  IOException {
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
         result.Pprimeni.sendKeys(Prijmeni);
         result.SomRobot.click();
@@ -85,11 +93,13 @@ public class RegistracniFormular {
 
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
+        extracted();
+
     }
     @Test
-    public void testEmailVelkaPismo (){
+    public void testEmailVelkaPismo ()throws IOException {
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
         result.Pjmeno.sendKeys(Jmeno);
         result.Pprimeni.sendKeys(Prijmeni);
@@ -100,14 +110,17 @@ public class RegistracniFormular {
         result.Pregistrace.click();
         WebElement Vysledek = driver.findElement(By.xpath("//div[contains(@class, 'success')]"));
         String TextVysledku = Vysledek.getText();
+
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
+
+        extracted();
 
     }
     @Test
-    public void testRuzneHela (){
+    public void testRuzneHela ()throws IOException {
 
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
         result.Pheslo.sendKeys(Heslo);
         result.Preheslo.sendKeys("fjaio");
@@ -115,12 +128,15 @@ public class RegistracniFormular {
         result.Pregistrace.click();
         WebElement Vysledek = driver.findElement(By.xpath("//div[contains(@class, 'alert-danger')]"));
         String TextVysledku = Vysledek.getText();
+
         Assert.assertEquals(TextVysledku,"Registracia neuspesna!" );
 
-    } @Test
-    public void testHappy (){
+        extracted();
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+    } @Test
+    public void testHappy ()throws IOException {
+
+        seleniumReworkBetter.Formular.Result result = getResult();
         result.Pjmeno().sendKeys(Jmeno);
         result.Pprimeni().sendKeys(Prijmeni);
         result.Pemail().sendKeys("NOVA@gmail");
@@ -133,12 +149,14 @@ public class RegistracniFormular {
         String TextVysledku = Vysledek.getText();
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
 
+        extracted();
+
     }
      @Test
-    public void testSpatnyEmailBezPripony() throws InterruptedException, IOException {
+    public void testSpatnyEmailBezPripony() throws IOException {
 
 
-        seleniumReworkBetter.RegistracniFormular.Result result = getResult();
+        seleniumReworkBetter.Formular.Result result = getResult();
 
          result.Pjmeno().sendKeys(Jmeno);
          result.Pprimeni().sendKeys(Prijmeni);
@@ -152,12 +170,17 @@ public class RegistracniFormular {
 
         String TextVysledku = Vysledek.getText();
         Assert.assertEquals(TextVysledku,"Registracia uspesna!" );
-         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-         FileUtils.copyFile(scrFile, new File("C:\\Users\\Michal\\AppData\\Local\\Temp\\screenshot.png"));
 
+        extracted();
+
+     }
+
+    private void extracted() throws IOException {
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("C:\\Users\\Michal\\AppData\\Local\\Temp\\screenshot.png"));
     }
 
-    private seleniumReworkBetter.RegistracniFormular.Result getResult() {
+    private seleniumReworkBetter.Formular.Result getResult() {
         WebElement Pemail = driver.findElement(By.xpath("//input[@name='email']"));
         WebElement Pjmeno = driver.findElement(By.xpath("//input[@name='name']"));
         WebElement Pprimeni = driver.findElement(By.xpath("//input[@name='surname']"));
@@ -165,7 +188,7 @@ public class RegistracniFormular {
         WebElement Preheslo = driver.findElement(By.xpath("//input[@name='password-repeat']"));
         WebElement SomRobot = driver.findElement(By.id("checkbox"));
         WebElement Pregistrace = driver.findElement(By.xpath("//button[@class='btn btn-success btn-lg btn-block']"));
-        seleniumReworkBetter.RegistracniFormular.Result sklad = new seleniumReworkBetter.RegistracniFormular.Result(Pemail, Pjmeno, Pprimeni, Pheslo, Preheslo, SomRobot, Pregistrace);
+        seleniumReworkBetter.Formular.Result sklad = new seleniumReworkBetter.Formular.Result(Pemail, Pjmeno, Pprimeni, Pheslo, Preheslo, SomRobot, Pregistrace);
         return sklad;
     }
 
