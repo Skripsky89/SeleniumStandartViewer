@@ -25,7 +25,7 @@ public class webGame {
     //Zde napište místo Michal umístění na vašem disku
     private final String mojeSlozka ="C:\\Users\\Michal\\";
     Date datum = new Date();
-    SimpleDateFormat formatdatum = new SimpleDateFormat("yyyy_MMMM_dd_HH_mm_ss");
+    SimpleDateFormat formatdatum = new SimpleDateFormat("dd_MMMM_yyyy_HH_mm_ss");
     String currentDateTime = formatdatum.format(datum);
 
     @Before
