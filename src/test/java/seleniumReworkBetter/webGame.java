@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.text.SimpleDateFormat;
 import org.openqa.selenium.WebElement;
 
-public class WebGame {
+public class webGame {
 
     private WebDriver driver;
     private final String Base_Url = "https://webgame.cz/wg/service.php?p=regplayer";
@@ -23,13 +23,14 @@ public class WebGame {
     private final String Heslo = "fafawrf2378fd";
     private final String Reheslo = "fafawrf2378fd";
     //Zde napište místo Michal umístění na vašem disku
-    private String mojeSlozka ="C:\\Users\\Michal\\";
+    private final String mojeSlozka ="C:\\Users\\Michal\\";
     Date datum = new Date();
     SimpleDateFormat formatdatum = new SimpleDateFormat("yyyy_MMMM_dd_HH_mm_ss");
     String currentDateTime = formatdatum.format(datum);
 
     @Before
     public void setUp (){
+        //Zde napište místo vaše umístění chrome drive
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michal\\Desktop\\JAVA\\chromedriver-win64\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(Base_Url);
@@ -41,7 +42,7 @@ public class WebGame {
     public void testCheckbox() throws IOException {
 
 
-        seleniumReworkBetter.WebGame.Result result = Wgresult();
+        seleniumReworkBetter.webGame.Result result = Wgresult();
         result.SomRobot.click();
         result.Pregistrace.click();
         WebElement Vysledek = driver.findElement(By.xpath("//div/p[contains(@class, 'warn')]"));
@@ -58,7 +59,7 @@ public class WebGame {
     public void testName  ()throws IOException{
 
 
-        seleniumReworkBetter.WebGame.Result rresult = Wgresult();
+        seleniumReworkBetter.webGame.Result rresult = Wgresult();
         rresult.Pjmeno.sendKeys(Login);
         rresult.SomRobot.click();
         rresult.Pregistrace.click();
@@ -73,7 +74,7 @@ public class WebGame {
     @Test
     public void testEmail ()throws IOException{
 
-        seleniumReworkBetter.WebGame.Result result = Wgresult();
+        seleniumReworkBetter.webGame.Result result = Wgresult();
         result.Pemail.sendKeys(Email);
         result.SomRobot.click();
         result.Pregistrace.click();
@@ -88,7 +89,7 @@ public class WebGame {
     @Test
     public void testPrijmeni ()throws IOException{
 
-        seleniumReworkBetter.WebGame.Result result = Wgresult();
+        seleniumReworkBetter.webGame.Result result = Wgresult();
         result.Pjmenovladce().sendKeys(JmenoVladce);
         result.SomRobot.click();
         result.Pregistrace.click();
@@ -103,7 +104,7 @@ public class WebGame {
     @Test
     public void testEmailVelkaPismo ()throws IOException{
 
-        WebGame.Result result = Wgresult();
+        webGame.Result result = Wgresult();
         result.Pjmeno.sendKeys(Login);
         result.Pjmenovladce.sendKeys(JmenoVladce);
         result.Pemail.sendKeys("ZNNZ@gmail.com");
@@ -111,10 +112,10 @@ public class WebGame {
         result.Preheslo.sendKeys(Reheslo);
         result.SomRobot.click();
         result.Pregistrace.click();
-        org.openqa.selenium.WebElement Vysledek = driver.findElement(By.xpath("//div/p[contains(@class, 'warn')]"));
+        WebElement Vysledek = driver.findElement(By.xpath("//div/p[contains(@class, 'warn')]"));
         String TextVysledku = Vysledek.getText();
 
-        org.junit.Assert.assertEquals(TextVysledku,"Přihlašovací jméno novak už existuje!" );
+        Assert.assertEquals(TextVysledku,"Přihlašovací jméno novak už existuje!" );
         extracted(mojeSlozka+"KontrolaTestEmailVelkaPismena"+currentDateTime+".png");
 
 
@@ -138,10 +139,10 @@ public class WebGame {
     } @Test
     public void testHappy ()throws IOException{
 
-        seleniumReworkBetter.WebGame.Result result = Wgresult();
+        seleniumReworkBetter.webGame.Result result = Wgresult();
         result.Pjmeno().sendKeys(Login);
         result.Pjmenovladce().sendKeys(JmenoVladce);
-        result.Pemail().sendKeys("NOVA@gmail");
+        result.Pemail().sendKeys(Email);
         result.Pheslo().sendKeys(Heslo);
         result.Preheslo().sendKeys(Reheslo);
         result.SomRobot().click();
@@ -156,7 +157,7 @@ public class WebGame {
     }
     @Test
     public void testSpatnyEmailBezPripony()throws IOException{
-        seleniumReworkBetter.WebGame.Result result = Wgresult();
+        seleniumReworkBetter.webGame.Result result = Wgresult();
         result.Pjmeno().sendKeys(Login);
         result.Pjmenovladce().sendKeys(JmenoVladce);
         result.Pemail().sendKeys("NOVA@gmail");
@@ -174,7 +175,7 @@ public class WebGame {
 
     }
 
-    private seleniumReworkBetter.WebGame.Result Wgresult() {
+    private seleniumReworkBetter.webGame.Result Wgresult() {
         WebElement Pemail = driver.findElement(By.xpath("//input[@name='email']"));
         WebElement Pjmenovladce = driver.findElement(By.xpath("//input[@name='pname0']"));
         WebElement Plogin = driver.findElement(By.xpath("//input[@name='login']"));
@@ -182,8 +183,7 @@ public class WebGame {
         WebElement Preheslo = driver.findElement(By.xpath("//input[@name='pasw1']"));
         WebElement SomRobot = driver.findElement(By.id("terms_consent"));
         WebElement Pregistrace = driver.findElement(By.xpath("//input[@name='action']"));
-        seleniumReworkBetter.WebGame.Result skladd = new seleniumReworkBetter.WebGame.Result((Pemail), Plogin, Pjmenovladce, Pheslo, Preheslo, SomRobot, Pregistrace);
-        return skladd;
+        return new seleniumReworkBetter.webGame.Result((Pemail), Plogin, Pjmenovladce, Pheslo, Preheslo, SomRobot, Pregistrace);
     }
 
 
