@@ -3,6 +3,7 @@ package seleniumReworkBetter;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 public class SSemafor {
 private org.openqa.selenium.WebDriver driver;
@@ -17,7 +18,7 @@ public void tearDone (){
 @org.junit.Before
 public void setUp (){
     System.setProperty("webdriver.chrome.driver", "C:\\Users\\Michal\\Desktop\\JAVA\\chromedriver-win64\\chromedriver.exe");
-    driver = new org.openqa.selenium.chrome.ChromeDriver();
+    driver = new ChromeDriver();
 
 }
 @org.junit.Test

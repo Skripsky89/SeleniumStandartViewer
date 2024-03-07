@@ -44,6 +44,7 @@ public class Alertt {
         System.out.println(driver.findElement(By.xpath("/html/body/div/div/div/h1")).getText());
 
         driver.findElement(By.id("alert3")).click();
+
         Alert alertB =driver.switchTo().alert();
         alertB.sendKeys("Yuri");
         alert.accept();
